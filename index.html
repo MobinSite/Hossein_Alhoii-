@@ -1,0 +1,981 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>علوم نهم | استاد آقای گوهری</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:"Baloo Bhaijaan 2",Tahoma,sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%,#173c58 0,transparent 30%),
+        radial-gradient(circle at 90% 10%,#39205d 0,transparent 30%),
+        linear-gradient(135deg,#07111f,#0b172b,#101a31);
+    color:white;
+    min-height:100vh;
+}
+
+header{
+    text-align:center;
+    padding:45px 20px 25px;
+}
+
+.logo{
+    font-size:65px;
+    animation:float 3s infinite ease-in-out;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-10px)}
+}
+
+header h1{
+    font-size:clamp(38px,6vw,65px);
+    background:linear-gradient(90deg,#53e8ff,#a078ff,#ff71cf);
+    -webkit-background-clip:text;
+    color:transparent;
+    font-weight:800;
+}
+
+header p{
+    color:#b9c9dc;
+    font-size:20px;
+}
+
+.teacher{
+    margin-top:15px;
+    color:#ddd;
+    font-size:20px;
+}
+
+.teacher b{
+    color:#ff91d8;
+}
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+}
+
+.home{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+    margin:30px auto 50px;
+}
+
+.card{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:25px;
+    padding:25px;
+    cursor:pointer;
+    transition:.3s;
+    backdrop-filter:blur(15px);
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 45px #0006;
+    border-color:#5ee8ff88;
+}
+
+.card .emoji{
+    font-size:48px;
+}
+
+.card h2{
+    margin-top:8px;
+    font-size:27px;
+}
+
+.card p{
+    color:#aebdd0;
+}
+
+#chapters{
+    display:none;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+button{
+    font-family:inherit;
+    border:0;
+    cursor:pointer;
+}
+
+.back{
+    background:#ffffff12;
+    color:white;
+    border:1px solid #ffffff22;
+    padding:10px 18px;
+    border-radius:14px;
+    font-size:17px;
+}
+
+.back:hover{
+    background:#ffffff20;
+}
+
+.search{
+    width:100%;
+    padding:15px 20px;
+    border-radius:17px;
+    border:1px solid #ffffff18;
+    background:#ffffff0d;
+    color:white;
+    font-family:inherit;
+    font-size:18px;
+    outline:none;
+    margin-bottom:20px;
+}
+
+.search::placeholder{
+    color:#8e9bad;
+}
+
+.chapter-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:18px;
+    padding-bottom:50px;
+}
+
+.chapter{
+    background:rgba(255,255,255,.065);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:22px;
+    padding:22px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.chapter:hover{
+    transform:translateY(-5px);
+    background:#ffffff10;
+}
+
+.chapter-number{
+    color:#60eaff;
+    font-weight:bold;
+}
+
+.chapter h3{
+    font-size:22px;
+    margin:7px 0;
+}
+
+.chapter p{
+    color:#aebbd0;
+}
+
+#lesson{
+    display:none;
+    padding-bottom:60px;
+}
+
+.lesson-box{
+    background:#ffffff09;
+    border:1px solid #ffffff15;
+    border-radius:27px;
+    padding:30px;
+    margin-bottom:20px;
+    box-shadow:0 15px 45px #0003;
+}
+
+.lesson-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.lesson-title .num{
+    color:#61eaff;
+    font-size:20px;
+}
+
+.lesson-title h1{
+    font-size:38px;
+    margin-top:5px;
+}
+
+.bismillah{
+    text-align:center;
+    font-size:30px;
+    color:#ffd27d;
+    margin:20px 0;
+}
+
+.section-title{
+    color:#ff91d8;
+    font-size:25px;
+    margin:25px 0 10px;
+}
+
+.text{
+    color:#d5deeb;
+    font-size:18px;
+    line-height:2.1;
+}
+
+ul{
+    padding-right:25px;
+    color:#d5deeb;
+    font-size:18px;
+    line-height:2;
+}
+
+li::marker{
+    color:#61eaff;
+}
+
+.qa{
+    margin-top:25px;
+}
+
+.question{
+    background:#ffffff08;
+    border-right:4px solid #65eaff;
+    padding:17px;
+    border-radius:12px;
+    margin-top:13px;
+}
+
+.question strong{
+    display:block;
+    color:#fff;
+    font-size:18px;
+}
+
+.answer{
+    color:#8ff0c4;
+    margin-top:7px;
+    line-height:1.9;
+}
+
+.soon{
+    display:none;
+    min-height:400px;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.soon-box{
+    padding:60px 40px;
+    border-radius:30px;
+    background:#ffffff0a;
+    border:1px solid #ffffff18;
+}
+
+.soon-box .emoji{
+    font-size:70px;
+}
+
+.soon-box h1{
+    font-family:Arial,sans-serif;
+    letter-spacing:8px;
+    font-size:70px;
+    margin:15px 0;
+    background:linear-gradient(90deg,#ff71cf,#9d7cff,#54eaff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.soon-box p{
+    color:#abb8cb;
+    font-size:20px;
+}
+
+footer{
+    text-align:center;
+    border-top:1px solid #ffffff12;
+    padding:35px 15px;
+    margin-top:20px;
+}
+
+.creator{
+    color:#b6c1d0;
+    font-size:20px;
+}
+
+.creator-name{
+    font-size:35px;
+    font-weight:bold;
+    background:linear-gradient(90deg,#55eaff,#ff71d2,#9b7cff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.signature{
+    font-family:cursive;
+    font-size:45px;
+    margin-top:10px;
+    transform:rotate(-5deg);
+}
+
+@media(max-width:600px){
+    .lesson-box{
+        padding:20px;
+    }
+
+    .lesson-title h1{
+        font-size:30px;
+    }
+
+    .soon-box h1{
+        font-size:48px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🎓</div>
+
+    <h1>دفتر هوشمند علوم نهم</h1>
+
+    <p>درسنامه، نکات مهم و سوالات امتحانی</p>
+
+    <div class="teacher">
+        استاد : <b>آقای گوهری</b>
+    </div>
+</header>
+
+
+<div class="container">
+
+<!-- صفحه اصلی -->
+
+<div id="home">
+
+    <div class="home">
+
+        <div class="card" onclick="openChapters()">
+            <div class="emoji">🔬</div>
+            <h2>علوم نهم</h2>
+            <p>مشاهده فصل‌های ۱ تا ۱۵</p>
+        </div>
+
+        <div class="card" onclick="showSoon()">
+            <div class="emoji">💻</div>
+            <h2>کار و فناوری</h2>
+            <p>این قسمت به‌زودی فعال می‌شود</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- فصل‌ها -->
+
+<section id="chapters">
+
+    <div class="topbar">
+        <h2>📚 فصل‌های علوم نهم</h2>
+        <button class="back" onclick="goHome()">← خانه</button>
+    </div>
+
+    <input
+        id="search"
+        class="search"
+        placeholder="🔎 جستجو بین فصل‌ها..."
+        oninput="searchChapters()"
+    >
+
+    <div id="chapterGrid" class="chapter-grid"></div>
+
+</section>
+
+
+<!-- درس -->
+
+<section id="lesson">
+
+    <div class="topbar">
+        <button class="back" onclick="openChapters()">← فصل‌ها</button>
+    </div>
+
+    <div id="lessonContent"></div>
+
+</section>
+
+
+<!-- SOON -->
+
+<section id="soon" class="soon">
+
+    <div class="soon-box">
+
+        <div class="emoji">🚀</div>
+
+        <h1>SOON</h1>
+
+        <p>بخش کار و فناوری به‌زودی اضافه می‌شود...</p>
+
+        <br>
+
+        <button class="back" onclick="goHome()">← برگشت</button>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<footer>
+
+    <div class="creator">
+        سایت درست شده توسط
+    </div>
+
+    <div class="creator-name">
+        حسین الهویی
+    </div>
+
+    <div class="signature">
+        Hossein Alhavi ✦
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   اطلاعات فصل‌ها
+========================= */
+
+const chapters = [
+
+{
+num:1,
+title:"مواد و نقش آنها در زندگی",
+icon:"🧪",
+summary:"مواد، ویژگی‌های آنها، فلزها، نافلزها و بسپارها.",
+points:[
+"مواد را می‌توان از نظر خالص یا مخلوط بودن بررسی کرد.",
+"فلزها معمولاً رسانای خوب گرما و برق هستند.",
+"بسیاری از نافلزها رسانایی کمتری دارند.",
+"بسپارها از اتصال واحدهای کوچک‌تر به وجود می‌آیند.",
+"شناخت ویژگی مواد در انتخاب و کاربرد آنها اهمیت دارد."
+],
+qa:[
+["ماده خالص چیست؟","ماده‌ای که از یک نوع ماده یا ذره تشکیل شده باشد."],
+["چرا مس در سیم‌کشی استفاده می‌شود؟","زیرا رسانایی الکتریکی خوبی دارد و قابلیت شکل‌پذیری مناسبی دارد."],
+["بسپار چیست؟","ماده‌ای است که از کنار هم قرار گرفتن تعداد زیادی واحد کوچک‌تر ساخته می‌شود."]
+]
+},
+
+{
+num:2,
+title:"رفتار اتم‌ها با یکدیگر",
+icon:"⚛️",
+summary:"اتم‌ها، الکترون‌ها، یون‌ها و پیوندهای شیمیایی.",
+points:[
+"اتم‌ها از هسته و الکترون‌ها تشکیل شده‌اند.",
+"الکترون‌های لایه بیرونی در واکنش‌های شیمیایی نقش مهمی دارند.",
+"اتم‌ها می‌توانند با از دست دادن یا گرفتن الکترون به یون تبدیل شوند.",
+"اتم‌ها برای رسیدن به آرایش پایدارتر می‌توانند با هم پیوند تشکیل دهند.",
+"ترکیب‌های یونی و مولکولی از رفتار اتم‌ها با یکدیگر به وجود می‌آیند."
+],
+qa:[
+["یون چیست؟","ذره‌ای است که در اثر از دست دادن یا گرفتن الکترون دارای بار الکتریکی می‌شود."],
+["چرا اتم‌ها با یکدیگر پیوند تشکیل می‌دهند؟","برای رسیدن به حالت پایدارتر."],
+["کاتیون چیست؟","یونی با بار مثبت که معمولاً از دست دادن الکترون ایجاد می‌شود."]
+]
+},
+
+{
+num:3,
+title:"به دنبال محیطی بهتر برای زندگی",
+icon:"🌍",
+summary:"آلودگی هوا، اثر سوخت‌ها، گازهای گلخانه‌ای و حفاظت از محیط زیست.",
+points:[
+"سوختن بسیاری از سوخت‌ها باعث تولید گازها و ذرات آلاینده می‌شود.",
+"آلودگی هوا می‌تواند بر سلامت انسان و جانداران اثر بگذارد.",
+"برخی گازها در گرم شدن زمین نقش دارند.",
+"کاهش مصرف سوخت‌های فسیلی و استفاده درست از انرژی به محیط زیست کمک می‌کند.",
+"بازیافت و مصرف درست منابع اهمیت زیادی دارد."
+],
+qa:[
+["آلودگی هوا چیست؟","وجود مواد زیان‌آور در هوا با غلظتی که بتواند بر انسان یا محیط اثر منفی بگذارد."],
+["یکی از راه‌های کاهش آلودگی چیست؟","کاهش مصرف سوخت‌های فسیلی و استفاده از انرژی‌های پاک‌تر."],
+["اثر گلخانه‌ای چیست؟","فرایندی که طی آن برخی گازهای جو بخشی از انرژی گرمایی زمین را نگه می‌دارند."]
+]
+},
+
+{
+num:4,
+title:"حرکت چیست؟",
+icon:"🏃",
+summary:"حرکت، مسافت، جابه‌جایی، سرعت و شتاب.",
+points:[
+"حرکت به تغییر مکان جسم نسبت به یک مرجع گفته می‌شود.",
+"مسافت طول مسیر طی‌شده است.",
+"جابه‌جایی تغییر مکان از نقطه آغاز تا پایان است.",
+"تندی متوسط از تقسیم مسافت بر زمان به دست می‌آید.",
+"شتاب نشان‌دهنده تغییر سرعت در واحد زمان است."
+],
+qa:[
+["حرکت چیست؟","تغییر مکان جسم نسبت به یک مرجع در طول زمان."],
+["تندی متوسط چگونه محاسبه می‌شود؟","مسافت طی‌شده تقسیم بر زمان سپری‌شده."],
+["شتاب چه چیزی را نشان می‌دهد؟","میزان تغییر سرعت در واحد زمان."]
+]
+},
+
+{
+num:5,
+title:"نیرو",
+icon:"💪",
+summary:"نیرو، اثر نیرو، وزن، جرم و قوانین حرکت.",
+points:[
+"نیرو می‌تواند باعث تغییر حرکت یا شکل جسم شود.",
+"نیرو کمیتی برداری است.",
+"وزن نیروی گرانشی واردشده بر جسم است.",
+"جرم مقدار ماده موجود در جسم است.",
+"نیروهای متعادل و نامتعادل می‌توانند رفتار حرکتی جسم را توضیح دهند."
+],
+qa:[
+["نیرو چیست؟","هل دادن یا کشیدن جسم که می‌تواند حرکت یا شکل آن را تغییر دهد."],
+["تفاوت جرم و وزن چیست؟","جرم مقدار ماده جسم است؛ وزن نیروی گرانشی وارد بر آن است."],
+["نیروی خالص چیست؟","برآیند یا مجموع برداری نیروهای وارد بر جسم."]
+]
+},
+
+{
+num:6,
+title:"زمین‌ساخت ورقه‌ای",
+icon:"🌋",
+summary:"ساختار زمین، ورقه‌های سنگ‌کره، زلزله و آتشفشان.",
+points:[
+"سنگ‌کره زمین به ورقه‌هایی تقسیم شده است.",
+"ورقه‌ها نسبت به یکدیگر حرکت می‌کنند.",
+"برهم‌کنش ورقه‌ها می‌تواند موجب زمین‌لرزه و فعالیت آتشفشانی شود.",
+"مرز ورقه‌ها می‌تواند واگرا، همگرا یا امتدادلغز باشد.",
+"حرکت ورقه‌ها در مقیاس زمین‌شناسی بسیار آهسته است."
+],
+qa:[
+["زمین‌ساخت ورقه‌ای چیست؟","نظریه‌ای که حرکت ورقه‌های سنگ‌کره و پیامدهای آن را توضیح می‌دهد."],
+["زلزله چگونه ایجاد می‌شود؟","معمولاً در اثر آزاد شدن ناگهانی انرژی در سنگ‌های پوسته زمین ایجاد می‌شود."],
+["آتشفشان چیست؟","محلی است که مواد داغ و گازها از درون زمین به سطح راه پیدا می‌کنند."]
+]
+},
+
+{
+num:7,
+title:"آثاری از گذشته زمین",
+icon:"🦴",
+summary:"فسیل‌ها، تاریخ زمین و شواهد گذشته.",
+points:[
+"فسیل‌ها از مهم‌ترین شواهد مطالعه گذشته زمین هستند.",
+"فسیل می‌تواند بقایای جاندار یا آثار فعالیت آن باشد.",
+"سنگ‌های رسوبی محیط مناسبی برای حفظ بسیاری از فسیل‌ها هستند.",
+"بررسی فسیل‌ها به شناخت جانداران و محیط‌های گذشته کمک می‌کند.",
+"زمین در طول زمان تغییرات زیادی داشته است."
+],
+qa:[
+["فسیل چیست؟","بقایای حفظ‌شده یا آثار فعالیت جانداران گذشته در سنگ‌ها یا رسوبات."],
+["فسیل‌ها چه اهمیتی دارند؟","برای شناخت جانداران و شرایط محیطی گذشته زمین به کار می‌روند."],
+["فسیل بیشتر در چه سنگ‌هایی یافت می‌شود؟","معمولاً در سنگ‌های رسوبی."]
+]
+},
+
+{
+num:8,
+title:"فشار و آثار آن",
+icon:"🎈",
+summary:"فشار، فشار مایع‌ها، گازها و کاربردهای آن.",
+points:[
+"فشار برابر نسبت نیرو به سطح است.",
+"با افزایش نیرو، فشار افزایش می‌یابد.",
+"با افزایش سطح تماس، فشار کاهش می‌یابد.",
+"مایع‌ها به دلیل وزن خود فشار ایجاد می‌کنند.",
+"فشار هوا در زندگی روزمره نقش مهمی دارد."
+],
+qa:[
+["فشار چگونه محاسبه می‌شود؟","از تقسیم نیروی واردشده بر سطحی که نیرو روی آن اثر می‌کند."],
+["چرا کفش پاشنه‌بلند فشار بیشتری وارد می‌کند؟","زیرا سطح تماس آن با زمین کمتر است."],
+["فشار مایع با افزایش عمق چه تغییری می‌کند؟","افزایش می‌یابد."]
+]
+},
+
+{
+num:9,
+title:"ماشین‌ها",
+icon:"⚙️",
+summary:"ماشین‌های ساده، اهرم، قرقره و مزیت مکانیکی.",
+points:[
+"ماشین وسیله‌ای است که انجام کار را آسان‌تر می‌کند.",
+"اهرم یکی از ماشین‌های ساده است.",
+"قرقره می‌تواند جهت نیرو را تغییر دهد یا در برخی حالت‌ها مزیت مکانیکی ایجاد کند.",
+"سطح شیب‌دار از ماشین‌های ساده است.",
+"ماشین‌ها معمولاً مقدار کار را کاهش نمی‌دهند؛ بلکه انجام آن را آسان‌تر می‌کنند."
+],
+qa:[
+["ماشین ساده چیست؟","وسیله‌ای ساده که انجام کار را آسان‌تر می‌کند."],
+["سه نمونه ماشین ساده چیست؟","اهرم، قرقره و سطح شیب‌دار."],
+["مزیت مکانیکی چیست؟","نسبت نیروی مقاوم به نیروی محرک."]
+]
+},
+
+{
+num:10,
+title:"نگاهی به فضا",
+icon:"🚀",
+summary:"منظومه شمسی، ستارگان، سیارات و ساختار کیهان.",
+points:[
+"خورشید یک ستاره است.",
+"سیارات منظومه شمسی به دور خورشید حرکت می‌کنند.",
+"زمین یکی از سیارات منظومه شمسی است.",
+"کهکشان مجموعه بزرگی از ستارگان، گاز و غبار است.",
+"نور اجرام آسمانی اطلاعات زیادی درباره آنها در اختیار دانشمندان می‌گذارد."
+],
+qa:[
+["خورشید چیست؟","یک ستاره است که مرکز منظومه شمسی محسوب می‌شود."],
+["سیاره چیست؟","جرمی آسمانی که به دور یک ستاره حرکت می‌کند و ویژگی‌های تعریف‌شده سیاره‌ای را دارد."],
+["کهکشان چیست؟","سامانه‌ای بزرگ شامل ستارگان، گاز، غبار و اجرام دیگر است."]
+]
+},
+
+{
+num:11,
+title:"گوناگونی جانداران",
+icon:"🧬",
+summary:"طبقه‌بندی جانداران و گروه‌های اصلی زیستی.",
+points:[
+"جانداران از نظر ویژگی‌های مشترک طبقه‌بندی می‌شوند.",
+"طبقه‌بندی باعث ساده‌تر شدن مطالعه تنوع جانداران می‌شود.",
+"ویژگی‌های ساختاری و شیوه زندگی در شناسایی جانداران اهمیت دارند.",
+"جانداران را می‌توان در گروه‌های بزرگ‌تر و کوچک‌تر دسته‌بندی کرد.",
+"تنوع زیستی نتیجه گوناگونی جانداران در طول زمان است."
+],
+qa:[
+["چرا جانداران را طبقه‌بندی می‌کنیم؟","برای مطالعه و شناسایی آسان‌تر آنها و نشان دادن شباهت‌ها و تفاوت‌ها."],
+["ملاک طبقه‌بندی جانداران چیست؟","ویژگی‌های مشترک و قابل بررسی آنها."],
+["تنوع زیستی چیست؟","گوناگونی جانداران و گونه‌های موجود در محیط‌های مختلف."]
+]
+},
+
+{
+num:12,
+title:"دنیای گیاهان",
+icon:"🌱",
+summary:"ساختمان گیاه، فتوسنتز، ریشه، ساقه و برگ.",
+points:[
+"گیاهان برای رشد به آب، مواد معدنی، نور و شرایط مناسب نیاز دارند.",
+"ریشه گیاه را در خاک نگه می‌دارد و در جذب آب و مواد معدنی نقش دارد.",
+"برگ محل اصلی فتوسنتز در بسیاری از گیاهان است.",
+"در فتوسنتز انرژی نورانی برای ساخت مواد آلی به کار می‌رود.",
+"گیاهان در زنجیره‌های غذایی نقش تولیدکننده دارند."
+],
+qa:[
+["فتوسنتز چیست؟","فرایندی که گیاه در آن با استفاده از انرژی نور، مواد آلی تولید می‌کند."],
+["وظیفه ریشه چیست؟","جذب آب و مواد معدنی و کمک به استقرار گیاه."],
+["چرا گیاهان تولیدکننده نامیده می‌شوند؟","زیرا می‌توانند مواد آلی مورد نیاز خود را بسازند."]
+]
+},
+
+{
+num:13,
+title:"جانوران بی‌مهره",
+icon:"🪱",
+summary:"گروه‌های جانوران بی‌مهره و ویژگی‌های آنها.",
+points:[
+"بی‌مهره‌ها ستون مهره‌ای ندارند.",
+"گروه‌های مختلفی از بی‌مهره‌ها در محیط‌های آبی و خشکی زندگی می‌کنند.",
+"اسفنج‌ها، کیسه‌تنان، کرم‌ها، نرم‌تنان و بندپایان از گروه‌های مهم بی‌مهره‌اند.",
+"بندپایان دارای اسکلت خارجی و اندام‌های بندبند هستند.",
+"حشرات یکی از گروه‌های مهم بندپایان‌اند."
+],
+qa:[
+["بی‌مهره چیست؟","جانوری که ستون مهره‌ای ندارد."],
+["بندپایان چه ویژگی مهمی دارند؟","بدن بندبند و اسکلت خارجی دارند و اندام‌های مفصلی در آنها دیده می‌شود."],
+["یک نمونه بی‌مهره نام ببرید.","پروانه، کرم خاکی، حلزون یا خرچنگ."]
+]
+},
+
+{
+num:14,
+title:"جانوران مهره‌دار",
+icon:"🐘",
+summary:"ماهی‌ها، دوزیستان، خزندگان، پرندگان و پستانداران.",
+points:[
+"مهره‌داران دارای ستون مهره‌ای هستند.",
+"گروه‌های اصلی مهره‌داران شامل ماهی‌ها، دوزیستان، خزندگان، پرندگان و پستانداران است.",
+"ماهی‌ها معمولاً در آب زندگی می‌کنند و با آبشش تنفس می‌کنند.",
+"پرندگان دارای پر و منقار هستند.",
+"پستانداران دارای غدد شیری هستند."
+],
+qa:[
+["مهره‌دار چیست؟","جانوری که ستون مهره‌ای دارد."],
+["پنج گروه اصلی مهره‌داران کدام‌اند؟","ماهی‌ها، دوزیستان، خزندگان، پرندگان و پستانداران."],
+["ویژگی مهم پستانداران چیست؟","داشتن غدد شیری و تغذیه نوزاد با شیر."]
+]
+},
+
+{
+num:15,
+title:"با هم زیستن",
+icon:"🌳",
+summary:"روابط جانداران، زنجیره غذایی، بوم‌سازگان و تنوع زیستی.",
+points:[
+"جانداران در یک بوم‌سازگان با یکدیگر ارتباط دارند.",
+"شکار و شکارچی یکی از روابط بین جانداران است.",
+"رقابت زمانی رخ می‌دهد که جانداران برای منابع مشابه رقابت کنند.",
+"تولیدکنندگان پایه بسیاری از زنجیره‌های غذایی هستند.",
+"تجزیه‌کنندگان مواد آلی را تجزیه کرده و مواد را به محیط برمی‌گردانند.",
+"همزیستی می‌تواند به شکل همسفرگی، همیاری یا انگلی باشد."
+],
+qa:[
+["تولیدکننده چیست؟","جانداری که می‌تواند مواد آلی مورد نیاز خود را بسازد؛ مانند بسیاری از گیاهان."],
+["تجزیه‌کنندگان چه نقشی دارند؟","بقایای جانداران را تجزیه می‌کنند و مواد را به محیط برمی‌گردانند."],
+["همیاری چیست؟","رابطه‌ای که در آن هر دو جاندار از ارتباط سود می‌برند."],
+["انگلی چیست؟","رابطه‌ای که در آن انگل سود می‌برد و میزبان آسیب می‌بیند."]
+]
+}
+
+];
+
+
+/* =========================
+   ساخت کارت فصل‌ها
+========================= */
+
+function renderChapters(list=chapters){
+
+    const grid=document.getElementById("chapterGrid");
+
+    grid.innerHTML="";
+
+    list.forEach(ch=>{
+
+        const card=document.createElement("div");
+
+        card.className="chapter";
+
+        card.onclick=()=>openLesson(ch.num);
+
+        card.innerHTML=`
+
+            <div class="chapter-number">
+                فصل ${ch.num}
+            </div>
+
+            <div style="font-size:40px;margin:5px 0">
+                ${ch.icon}
+            </div>
+
+            <h3>${ch.title}</h3>
+
+            <p>${ch.summary}</p>
+
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   باز کردن فصل‌ها
+========================= */
+
+function openChapters(){
+
+    document.getElementById("home").style.display="none";
+    document.getElementById("lesson").style.display="none";
+    document.getElementById("soon").style.display="none";
+
+    document.getElementById("chapters").style.display="block";
+
+    renderChapters();
+
+    window.scrollTo(0,0);
+}
+
+
+/* =========================
+   باز کردن درس
+========================= */
+
+function openLesson(number){
+
+    const ch=chapters.find(x=>x.num===number);
+
+    if(!ch)return;
+
+    document.getElementById("home").style.display="none";
+    document.getElementById("chapters").style.display="none";
+    document.getElementById("soon").style.display="none";
+    document.getElementById("lesson").style.display="block";
+
+
+    let points="";
+
+    ch.points.forEach(x=>{
+        points+=`<li>${x}</li>`;
+    });
+
+
+    let questions="";
+
+    ch.qa.forEach((q,i)=>{
+
+        questions+=`
+
+        <div class="question">
+
+            <strong>
+                ❓ ${i+1}. ${q[0]}
+            </strong>
+
+            <div class="answer">
+                ✅ پاسخ: ${q[1]}
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+
+    document.getElementById("lessonContent").innerHTML=`
+
+        <div class="lesson-box">
+
+            <div class="lesson-title">
+
+                <div class="num">
+                    فصل ${ch.num}
+                </div>
+
+                <h1>
+                    ${ch.icon} ${ch.title}
+                </h1>
+
+            </div>
+
+            <div class="bismillah">
+                به نام خدا
+            </div>
+
+            <h2 class="section-title">
+                📚 خلاصه فصل
+            </h2>
+
+            <p class="text">
+                ${ch.summary}
+            </p>
+
+            <h2 class="section-title">
+                ⭐ نکات مهم
+            </h2>
+
+            <ul>
+                ${points}
+            </ul>
+
+            <div class="qa">
+
+                <h2 class="section-title">
+                    📝 سوالات و جواب‌ها
+                </h2>
+
+                ${questions}
+
+            </div>
+
+        </div>
+
+    `;
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* =========================
+   جستجو
+========================= */
+
+function searchChapters(){
+
+    const value=document
+        .getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const filtered=chapters.filter(ch=>
+        ch.title.toLowerCase().includes(value) ||
+        ch.summary.toLowerCase().includes(value) ||
+        ("فصل "+ch.num).includes(value)
+    );
+
+    renderChapters(filtered);
+}
+
+
+/* =========================
+   SOON
+========================= */
+
+function showSoon(){
+
+    document.getElementById("home").style.display="none";
+    document.getElementById("chapters").style.display="none";
+    document.getElementById("lesson").style.display="none";
+
+    document.getElementById("soon").style.display="flex";
+
+    window.scrollTo(0,0);
+}
+
+
+/* =========================
+   خانه
+========================= */
+
+function goHome(){
+
+    document.getElementById("home").style.display="block";
+    document.getElementById("chapters").style.display="none";
+    document.getElementById("lesson").style.display="none";
+    document.getElementById("soon").style.display="none";
+
+    window.scrollTo(0,0);
+}
+
+</script>
+
+</body>
+</html>
+```
